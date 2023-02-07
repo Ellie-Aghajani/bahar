@@ -1,8 +1,8 @@
 const morgan = require('morgan');
 const express = require('express');
 const app = express();
-const categories = require('./routs/categories')
-const home = require('./routs/home')
+const categories = require('./routes/categories')
+const home = require('./routes/home')
 const logger = require('./middleware/logger')
 
 const Joi = require('joi');
