@@ -1,14 +1,19 @@
 import './App.css';
 import React, { Component} from "react";
 import Plants from'./components/plants';
-import Counter from './components/Counter';
+import Counters from './components/counters';
+import Navbar from "./components/navbar"
 
 class App extends Component {
   render(){
     return (
-      <main className='container'>
-        <Plants />
-      </main>
+      <React.Fragment>
+        <Navbar />
+        <main className='container'>
+          <Counters />
+          <Plants />
+        </main>
+      </React.Fragment>
     );
   }
 }
