@@ -66,7 +66,7 @@ class Plants extends Component {
             <Pagination 
                 itemsCount= {count} 
                 pageSize={this.state.pageSize} 
-                onPage={this.handlePageChange}/> 
+                onPageChange={this.handlePageChange}/> 
             </React.Fragment>
             
 
