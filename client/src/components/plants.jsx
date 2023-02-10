@@ -89,7 +89,7 @@ class Plants extends Component {
                 
             </table>
             <Pagination 
-                itemsCount= {count} 
+                itemsCount= {filtered.length} 
                 pageSize={pageSize} 
                 onPageChange={this.handlePageChange}
                 currentPage= {currentPage} />
