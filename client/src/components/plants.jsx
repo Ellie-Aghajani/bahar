@@ -33,7 +33,7 @@ class Plants extends Component {
 
     };
     handleCategorySelect= category => {
-
+        this.setState({ selectedCategory: category, currentPage: 1 });
     }
     render() {
         const {length:count} = this.state.plants;
@@ -44,7 +44,13 @@ class Plants extends Component {
         return (
             <div classname="row">
                 <div className="col-2">
-                <ListGroup items={this.state.categories} onItemSelect={this.handleCategorySelect}/>
+                <ListGroup 
+                    items={this.state.categories} 
+                    textProperty ="name"
+                    valueProperty="_id"
+
+                    onItemSelect={this.handleCategorySelect}/>
+
                 </div>
                 <div className="col">
                     
