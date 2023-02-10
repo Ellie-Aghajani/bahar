@@ -6,7 +6,8 @@ const plants = [
     title: "Snake Laurentii",
     category: { _id: "5b21ca3eeb7f6fbccd471818", name: "Low Light Tolerant" },
     numberInStock: 6,
-    dailySalesRate: 2.5
+    dailySalesRate: 2.5,
+    liked: true
   },
   {
     _id: "5b21ca3eeb7f6fbccd471816",
