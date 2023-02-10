@@ -37,24 +37,24 @@ class Plants extends Component {
     }
     render() {
         const {length:count} = this.state.plants;
-        const {pageSize, currentPage, plants:allPlants} = this.state;
+        const {pageSize, currentPage,selectedCategory plants:allPlants} = this.state;
         if(count === 0) 
              return <p>There are no plants</p>;
-        const plants = paginate(pageSize, currentPage, allPlants)   
+             const filtered = selectedCategory
+              ? allPlants.filter(m=>m.category._id ===selectedCategory._) : allPlants
+        const plants = paginate(pageSize, currentPage, filtered)   
         return (
             <div classname="row">
-                <div className="col-2">
+                <div className="col-3">
                 <ListGroup 
                     items={this.state.categories} 
-                    textProperty ="name"
-                    valueProperty="_id"
-
-                    onItemSelect={this.handleCategorySelect}/>
+                    onItemSelect={this.handleCategorySelect}
+                    selectedItem={this.state.selectedCategory}/>
 
                 </div>
                 <div className="col">
                     
-                 <p>Showing {count} plants in the database </p>
+                 <p>Showing {filtered} plants in the database </p>
             <table className="table">
                 <thead>
                     <tr>
