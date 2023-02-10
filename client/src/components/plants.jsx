@@ -2,17 +2,25 @@ import React, {Component} from "react";
 import {getPlants} from "../services/fakePlantService";
 import Like from "./common/like"
 import Pagination from "./common/pagination"
-
+import _ from 'lodash';
+import { paginate } from "../utils/paginate";
+import ListGroup from "./common/listGroup";
+import {getCategories} from "../services/fakeCategoryService";
 class Plants extends Component {
     state = {
-        plants:getPlants(),
+        plants:[],
+        currentPage:1,
+        categories:[],
         pageSize:4
     };
-    handleDelete = (plant) => {
-        const plants = this.state.plants.filter(m =>m._id !== plant._id);
-        this.setState({plants});
+    componentDidMount() {
+        this.setState({plants: getPlants(),categories: getCategories()});
     }
-    handleLike = (plant)=>{
+    handleDelete = plant => {
+        const plants = this.state.plants.filter(m => m._id !== plant._id);
+        this.setState({plants});
+    };
+    handleLike = plant=>{
         const plants = [...this.state.plants];
         const index = plants.indexOf(plant);
         plants[index]= {...plants[index]};
@@ -21,15 +29,26 @@ class Plants extends Component {
 
     };
     handlePageChange= page => {
+        this.setState({currentPage:page});
+
+    };
+    handleCategorySelect= category => {
 
     }
     render() {
         const {length:count} = this.state.plants;
+        const {pageSize, currentPage, plants:allPlants} = this.state;
         if(count === 0) 
              return <p>There are no plants</p>;
+        const plants = paginate(pageSize, currentPage, allPlants)   
         return (
-            <React.Fragment>
-                 <p>Showing {this.state.plants.length} plants in the database </p>
+            <div classname="row">
+                <div className="col-2">
+                <ListGroup items={this.state.categories} onItemSelect={this.handleCategorySelect}/>
+                </div>
+                <div className="col">
+                    
+                 <p>Showing {count} plants in the database </p>
             <table className="table">
                 <thead>
                     <tr>
@@ -43,21 +62,21 @@ class Plants extends Component {
                 <tbody>
                     {this.state.plants.map(plant =>(
                         <tr key={plant._id}>
-                        <td>{plant.title}</td>
-                        <td>{plant.category.name}</td>
-                        <td>{plant.numberInStock}</td>
-                        <td>{plant.dailySalesRate}</td>
-                        <td>
-                            <Like liked={plant.liked} onClick={() => this.handleLike(plant) }/>
-                        </td>
-                        <td>
-                            <button 
-                            onClick={()=> this.handleDelete(plant)} 
-                            className= "btn btn-danger btn-sm">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
+                            <td>{plant.title}</td>
+                            <td>{plant.category.name}</td>
+                            <td>{plant.numberInStock}</td>
+                            <td>{plant.dailySalesRate}</td>
+                            <td>
+                                <Like liked={plant.liked} onClick={() => this.handleLike(plant) }/>
+                            </td>
+                            <td>
+                                <button 
+                                onClick={()=> this.handleDelete(plant)} 
+                                className= "btn btn-danger btn-sm">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
                     ))}
                 
                 </tbody>
@@ -65,12 +84,16 @@ class Plants extends Component {
             </table>
             <Pagination 
                 itemsCount= {count} 
-                pageSize={this.state.pageSize} 
-                onPageChange={this.handlePageChange}/> 
-            </React.Fragment>
+                pageSize={pageSize} 
+                onPageChange={this.handlePageChange}
+                currentPage= {currentPage} />
+
+                </div>
+ 
+            </div>
             
 
-     )
+     );
      
     }
    
