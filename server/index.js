@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const app = express();
 const categories = require('./routes/categories')
-const home = require('./routes/home')
-const Joi = require('joi');
+const customers = require('./routes/customers')
+const app = express();
 const port = process.env.PORT|| 2017;
 
 mongoose.connect('mongodb://localhost/bahar')
@@ -13,9 +12,7 @@ mongoose.connect('mongodb://localhost/bahar')
 
 app.use(express.json());
 app.use('/api/categories', categories);
-app.use('/', home);
-app.use(express.urlencoded ({ extended: true })) ;
-app.use(express.static('public'));
+app.use('/api/customers', customers);
 
 
 
