@@ -1,17 +1,16 @@
 import React from "react";
 
-const Form = ({ match, history }) => {
-  return (
-    <div>
-      <h1>Form {match.params.id} </h1>
-      <button
-        className="btn btn-primary"
-        onClick={() => history.push("/plants")}
-      >
-        Save
-      </button>
-    </div>
-  );
+class Form extends Form {
+  state = {
+    data: {
+      title: "",
+      genreId: "",
+      numberInStock: "",
+      dailyRentalRate: ""
+    },
+    genres: [],
+    errors: {}
+  };
 };
 
 export default Form;
