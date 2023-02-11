@@ -2,10 +2,8 @@ const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 const mongoose = require('mongoose');
 require('dotenv').config()
-const mongoPassword = process.env.MONGO_PASSWORD;
-const mongoHost = process.env.MONGO_HOST;
-console.log('+++++++++++', mongoPassword );
-mongoose.connect(`mongodb+srv://admin:${mongoPassword}@${mongoHost}/?retryWrites=true&w=majority`)
+
+mongoose.connect(`mongodb://localhost:27017/baharfinal`)
   .then(() => console.log('Connected to MongoDB...'))
   .catch(err => console.error('Could not connect to MongoDB...'));
 
