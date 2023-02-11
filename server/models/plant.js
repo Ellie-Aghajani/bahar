@@ -19,7 +19,7 @@ const Plant = mongoose.model('Plants', new mongoose.Schema({
     required: true,
     min: 0,
     max: 255
-  },
+  }
 
 }));
 
@@ -27,7 +27,7 @@ function validatePlant(plant) {
   const schema = {
     title: Joi.string().min(5).max(50).required(),
     categoryId: Joi.string().required(),
-    numberInStock: Joi.number().min(0).required(),
+    numberInStock: Joi.number().min(0).required()
   };
 
   return Joi.validate(plant, schema);
