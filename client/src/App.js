@@ -7,6 +7,7 @@ import Purchase from "./components/purchase";
 import NotFound from "./components/notFound";
 import Navbar from "./components/navbar";
 import LoginForm from "./components/loginForm";
+import RegisterForm from "./components/registerForm";
 import "./App.css";
 
 class App extends Component {
@@ -16,7 +17,9 @@ class App extends Component {
         <Navbar />
         <main className="container">
           <Switch>
-            <Route path="/plants/:id" component={Form} />
+           <Route path="/register" component={RegisterForm} />
+            <Route path="/form" component={Form} />
+            <Route path="/loginForm" component={LoginForm} />
             <Route path="/plants" component={Plants} />
             <Route path="/customer" component={Customers} />
             <Route path="/purchase" component={Purchase} />
