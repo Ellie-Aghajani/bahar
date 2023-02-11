@@ -1,66 +1,53 @@
+const {Category, validate} = require('../models/category');
+const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 
-const categories = [
-    {id:1, name:'Low Light Tolerant'}, 
-    {id:2, name: 'Pet-friendly'},
-    {id:3, name: 'Hard to Kill'},
-];
 
-router.get('/', (req, res) =>{
-    res.send([1,2,3]);
+router.get('/', async (req, res) =>{
+  const categories = await Category.find().sort('name');
+  res.send(categories);
 });
 
-router.post('/', (req, res) =>{
-    const {error} = validateCategories(req.body);
-    
-    if (error) return res.status(400).send(result.error.details[0].message);
-    
-    const category = {
-        id: categories.length + 1,
-        name: req.body.name
-    };
-    categories.push(category);
-    res.send(category);
+router.post('/', async (req, res) =>{
+  const {error} = validate(req.body);
+  
+  if (error) return res.status(400).send(result.error.details[0].message);
+  const category = new Category({ name: req.body.name });
+  await category.save();
+  
+  res.send(category);
 });
 
+router.put('/:id', async (req, res) => {
+  const { error } = validate(req.body); 
+  if (error) return res.status(400).send(error.details[0].message);
 
+  const category = await Category.findByIdAndUpdate(req.params.id, { name: req.body.name }, {
+    new: true
+  });
 
-router.get('/:id', (req, res) =>{
-    const category = categories.find(c => c.id === parseInt(req.params.id));
-    if (!category) return res.status(404).send('Not Found');
-    
-    res.send(category);
+  if (!category) return res.status(404).send('The category with the given ID was not found.');
+  
+  res.send(category);
+});
+  
+router.delete('/:id', async (req, res) => {
+  const category = await Category.findByIdAndRemove(req.params.id);
+
+  if (!category) return res.status(404).send('The category with the given ID was not found.');
+
+  res.send(category);
 });
 
-router.put('/:id', (req, res) => {
-    const category = categories.find(c => c.id === parseInt(req.params.id));
-    if (!category) return res.status(404).send('Not Found');
- 
-    const {error} = validateCategories(req.body);
-    
-    if (error) return res.status(400).send(result.error.details[0].message);
+router.get('/:id', async (req, res) => {
+  const category = await Category.findById(req.params.id);
 
-    category.name = req.body.name;
-    res.send(category);
+  if (!category) return res.status(404).send('The category with the given ID was not found.');
 
-
+  res.send(category);
 });
-function validateCategories(category) {
-    const schema = {
-        name: Joi.string().min(3).required()
-    };
-    return Joi.validate(category, schema);
-}
+  
 
-router.delete('/:id', (req, res) => {
-    const category = categories.find(c => c.id === parseInt(req.params.id));
-    if (!category) return res.status(404).send('Not Found');
-    //delete
-    const index = categories.indexOf(category);
-    categories.splice(index, 1);
-
-    res.send(category);
-});
-
+  
 module.exports = router;
