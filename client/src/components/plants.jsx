@@ -14,7 +14,7 @@ class Plants extends Component {
         pageSize:4
     };
     componentDidMount() {
-        this.setState({plants: getPlants(),categories: getCategories()});
+        this.setState({_id: "" , name:"all Categories"}, {plants: getPlants(),categories: getCategories()});
     }
     handleDelete = plant => {
         const plants = this.state.plants.filter(m => m._id !== plant._id);
@@ -32,6 +32,10 @@ class Plants extends Component {
         this.setState({currentPage:page});
 
     };
+    handleSort= path => {
+
+    }
+
     handleCategorySelect= category => {
         this.setState({ selectedCategory: category, currentPage: 1 });
     }
