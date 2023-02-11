@@ -6,6 +6,7 @@ import Customers from "./components/customer";
 import Purchase from "./components/purchase";
 import NotFound from "./components/notFound";
 import Navbar from "./components/navbar";
+import LoginForm from "./components/loginForm";
 import "./App.css";
 
 class App extends Component {
