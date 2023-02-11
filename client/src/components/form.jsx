@@ -16,49 +16,57 @@ class Form extends Form {
     title: Joi.string()
       .required()
       .label("Title"),
-    genreId: Joi.string()
+    categoryId: Joi.string()
       .required()
-      .label("Genre"),
+      .label("Category"),
     numberInStock: Joi.number()
       .required()
       .min(0)
       .max(100)
       .label("Number in Stock"),
-    dailyRentalRate: Joi.number()
-      .required()
-      .min(0)
-      .max(10)
-      .label("Daily Rental Rate")
+
   };
   componentDidMount() {
-    const genres = getGenres();
-    this.setState({ genres });
+    const categories = getCategories();
+    this.setState({ categories });
 
-    const movieId = this.props.match.params.id;
-    if (movieId === "new") return;
+    const plantId = this.props.match.params.id;
+    if (plantId === "new") return;
 
-    const movie = getMovie(movieId);
-    if (!movie) return this.props.history.replace("/not-found");
+    const plant = getPlant(plantId);
+    if (!plant) return this.props.history.replace("/not-found");
 
-    this.setState({ data: this.mapToViewModel(movie) });
+    this.setState({ data: this.mapToViewModel(plant) });
   }
 
-  mapToViewModel(movie) {
+  mapToViewModel(plant) {
     return {
-      _id: movie._id,
-      title: movie.title,
-      genreId: movie.genre._id,
-      numberInStock: movie.numberInStock,
-      dailyRentalRate: movie.dailyRentalRate
+      _id: plant._id,
+      title: plant.title,
+      categoryId: plant.category._id,
+      numberInStock: plant.numberInStock,
+      
     };
   }
 
   doSubmit = () => {
-    saveMovie(this.state.data);
+    saveplant(this.state.data);
 
-    this.props.history.push("/movies");
+    this.props.history.push("/plants");
   };
-
+  render() {
+    return (
+      <div>
+        <h1> Form</h1>
+        <form onSubmit={this.handleSubmit}>
+          {this.renderInput("title", "Title")}
+          {this.renderSelect("categoryId", "Category", this.state.categorys)}
+          {this.renderInput("numberInStock", "Number in Stock", "number")}
+          {this.renderButton("Save")}
+        </form>
+      </div>
+    );
+  }
 };
 
 export default Form;
