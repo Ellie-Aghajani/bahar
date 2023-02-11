@@ -1,4 +1,4 @@
-import * as categoriesAPI from "./fakeCategoryService";
+import * as categoriesAPI from "./plantCategories";
 
 const plants = [
   {
