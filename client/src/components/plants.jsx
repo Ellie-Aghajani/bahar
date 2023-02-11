@@ -19,9 +19,9 @@ class Plants extends Component {
     };
 
     componentDidMount() {
-        const categories = [{ _id: "", name: "All Genres" }, ...getCategories()];
+        const categories = [{ _id: "", name: "All Categories" }, ...getCategories()];
     
-        this.setState({ movies: getPlants(), categories });
+        this.setState({ plants: getPlants(), categories });
       }
     
       handleDelete = plant => {
@@ -30,83 +30,85 @@ class Plants extends Component {
       };
 
     
-    handleLike = movie => {
-        const movies = [...this.state.movies];
-        const index = movies.indexOf(movie);
-        movies[index] = { ...movies[index] };
-        movies[index].liked = !movies[index].liked;
-        this.setState({ movies });
+    handleLike = plant => {
+        const plants = [...this.state.plants];
+        const index = plants.indexOf(plant);
+        plants[index] = { ...plants[index] };
+        plants[index].liked = !plants[index].liked;
+        this.setState({ plants });
     };
 
     handlePageChange = page => {
         this.setState({ currentPage: page });
     };
 
-
-
-
-    };
-    handlePageChange= page => {
-        this.setState({currentPage:page});
-
-    };
-    handleSort= path => {
-        const sortColumn = {...this.state.sortColumn};
-        if(sortColumn.path===path)
-        sortColumn.order = (sortColum.order ==="asc") ? 'desc': 'asc';
-        else {
-            sortColumn.path=path;
-            sortColumn = 'asc'
-        }
-        this.setState({sortColumn:})
-
-    }
-
-    handleCategorySelect= category => {
-       
+    handleCategorySelect = category => {
         this.setState({ selectedCategory: category, currentPage: 1 });
-    }
+      };
+    
+      handleSort = sortColumn => {
+        this.setState({ sortColumn });
+      };
+    
+      getPagedData = () => {
+        const {
+          pageSize,
+          currentPage,
+          sortColumn,
+          selectedCategory,
+          plants: allPlants
+        } = this.state;
+    
+        const filtered =
+          selectedCategory && selectedCategory._id
+            ? allPlants.filter(m => m.category._id === selectedCategory._id)
+            : allPlants;
+    
+        const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+    
+        const plants = paginate(sorted, currentPage, pageSize);
+    
+        return { totalCount: filtered.length, data: plants };
+      };
+    
 
-    render() {
-        const {length:count} = this.state.plants;
-        const {pageSize, currentPage,selectedCategory, sortColumn, plants:allPlants} = this.state;
-        if(count === 0) 
-             return <p>There are no plants</p>;
 
-             const filtered = selectedCategory
-              ? allPlants.filter(m=>m.category._id ===selectedCategory._) : allPlants
-
-              const sorted= _orderBy(filtered, [sortColumn.path], [sortColumn.order]);
-        const plants = paginate(sorted, pageSize, currentPage, filtered)   
+      render() {
+        const { length: count } = this.state.plants;
+        const { pageSize, currentPage, sortColumn } = this.state;
+    
+        if (count === 0) return <p>There are no plants in the database.</p>;
+    
+        const { totalCount, data: plants } = this.getPagedData();
+    
         return (
-            <div classname="row">
-                <div className="col-3">
-                <ListGroup 
-                    items={this.state.categories} 
-                    onItemSelect={this.handleCategorySelect}
-                    selectedItem={this.state.selectedCategory}/>
-
-                </div>
-                <div className="col">
-                    
-                 <p>Showing {filtered} plants in the database </p>
-                 <PlantsTable plants = {plants} onLike={this,handleLike} onDelete={this.handleDelete}/>
-
-            <Pagination 
-                itemsCount= {filtered.length} 
-                pageSize={pageSize} 
-                onPageChange={this.handlePageChange}
-                currentPage= {currentPage} />
-
-                </div>
- 
+          <div className="row">
+            <div className="col-3">
+              <ListGroup
+                items={this.state.categories}
+                selectedItem={this.state.selectedCategory}
+                onItemSelect={this.handleCategorySelect}
+              />
             </div>
-            
-
-     );
-     
+            <div className="col">
+              <p>Showing {totalCount} plants in our GreenHouse.</p>
+              <PlantsTable
+                plants={plants}
+                sortColumn={sortColumn}
+                onLike={this.handleLike}
+                onDelete={this.handleDelete}
+                onSort={this.handleSort}
+              />
+              <Pagination
+                itemsCount={totalCount}
+                pageSize={pageSize}
+                currentPage={currentPage}
+                onPageChange={this.handlePageChange}
+              />
+            </div>
+          </div>
+        );
+      }
     }
-   
-}
-
-export default Plants;
+    
+    export default Plants;
