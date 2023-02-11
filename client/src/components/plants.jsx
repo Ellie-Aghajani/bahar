@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import PlantTable from "./plantTable";
+import PlantsTable from "./plantTable";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
-import { getPlants } from "../services/fakePlantService";
-import { getCategories } from "../services/fakeCategoryService";
+import { getPlants } from "../services/PlantDB";
+import { getCategories } from "../services/plantCategories";
 import { paginate } from "../utils/paginate";
 import _ from "lodash";
 
