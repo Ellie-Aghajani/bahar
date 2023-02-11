@@ -6,12 +6,14 @@ import _ from 'lodash';
 import { paginate } from "../utils/paginate";
 import ListGroup from "./common/listGroup";
 import {getCategories} from "../services/fakeCategoryService";
+import _ from 'lodash';
 class Plants extends Component {
     state = {
         plants:[],
         currentPage:1,
         categories:[],
-        pageSize:4
+        pageSize:4,
+        sortColumn: {path:"title , order:"asc"}
     };
     componentDidMount() {
         this.setState({_id: "" , name:"all Categories"}, {plants: getPlants(),categories: getCategories()});
@@ -33,20 +35,33 @@ class Plants extends Component {
 
     };
     handleSort= path => {
+        const sortColumn = {...this.state.sortColumn};
+        if(sortColumn.path===path)
+        sortColumn.order = (sortColum.order ==="asc") ? 'desc': 'asc';
+        else {
+            sortColumn.path=path;
+            sortColumn = 'asc'
+        }
+        this.setState({sortColumn:})
 
     }
 
     handleCategorySelect= category => {
+       
         this.setState({ selectedCategory: category, currentPage: 1 });
     }
+
     render() {
         const {length:count} = this.state.plants;
-        const {pageSize, currentPage,selectedCategory plants:allPlants} = this.state;
+        const {pageSize, currentPage,selectedCategory, sortColumn, plants:allPlants} = this.state;
         if(count === 0) 
              return <p>There are no plants</p>;
+
              const filtered = selectedCategory
               ? allPlants.filter(m=>m.category._id ===selectedCategory._) : allPlants
-        const plants = paginate(pageSize, currentPage, filtered)   
+
+              const sorted= _orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+        const plants = paginate(sorted, pageSize, currentPage, filtered)   
         return (
             <div classname="row">
                 <div className="col-3">
