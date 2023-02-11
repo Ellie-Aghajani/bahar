@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import Plants from "./components/movies";
-import PlantForm from "./components/plantForm";
+import Form from "./components/form";
 import Customers from "./components/customers";
-import Purchase from "./components/Purchase";
+import Purchase from "./components/purchase";
 import NotFound from "./components/notFound";
 import Navbar from "./components/navbar";
 import "./App.css";
