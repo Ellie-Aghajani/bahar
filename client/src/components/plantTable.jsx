@@ -1,38 +1,44 @@
-import React from 'react';
-const PlantsTable = props => {
+import React, { Component } from "react";
+import Table from "./common/table";
+import Like from "./common/like";
+
+class PlantsTable extends Component {
+  columns = [
+    { path: "title", label: "Title" },
+    { path: "genre.name", label: "Genre" },
+    { path: "numberInStock", label: "Stock" },
+    { path: "dailyRentalRate", label: "Rate" },
+    {
+      key: "like",
+      content: plant => (
+        <Like liked={plant.liked} onClick={() => this.props.onLike(plant)} />
+      )
+    },
+    {
+      key: "delete",
+      content: plant => (
+        <button
+          onClick={() => this.props.onDelete(plant)}
+          className="btn btn-danger btn-sm"
+        >
+          Delete
+        </button>
+      )
+    }
+  ];
+
+  render() {
+    const { plants, onSort, sortColumn } = this.props;
+
     return (
-        <table className="table">
-        <thead>
-            <tr>
-                <th>Plant</th>
-                <th>Category</th>
-                <th>Stock</th>
-                <th>Rate</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            {this.state.plants.map(plant =>(
-                <tr key={plant._id}>
-                    <td>{plant.title}</td>
-                    <td>{plant.category.name}</td>
-                    <td>{plant.numberInStock}</td>
-                    <td>{plant.dailySalesRate}</td>
-                    <td>
-                        <Like liked={plant.liked} onClick={() => this.handleLike(plant) }/>
-                    </td>
-                    <td>
-                        <button 
-                        onClick={()=> this.handleDelete(plant)} 
-                        className= "btn btn-danger btn-sm">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-            ))}
-
-        </tbody>
-
-        </table>
-    )
+      <Table
+        columns={this.columns}
+        data={plants}
+        sortColumn={sortColumn}
+        onSort={onSort}
+      />
+    );
+  }
 }
+
+export default PlantsTable;
