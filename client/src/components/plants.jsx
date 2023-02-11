@@ -1,33 +1,49 @@
-import React, {Component} from "react";
-import {getPlants} from "../services/fakePlantService";
-import Like from "./common/like"
-import Pagination from "./common/pagination"
-import _ from 'lodash';
-import { paginate } from "../utils/paginate";
+import React, { Component } from "react";
+import PlantTable from "./plantTable";
 import ListGroup from "./common/listGroup";
-import {getCategories} from "../services/fakeCategoryService";
-import _ from 'lodash';
+import Pagination from "./common/pagination";
+import { getPlants } from "../services/fakePlantService";
+import { getCategories } from "../services/fakeCategoryService";
+import { paginate } from "../utils/paginate";
+import _ from "lodash";
+
+
+
 class Plants extends Component {
     state = {
-        plants:[],
-        currentPage:1,
-        categories:[],
-        pageSize:4,
-        sortColumn: {path:"title , order:"asc"}
+      plants: [],
+      categories: [],
+      currentPage: 1,
+      pageSize: 4,
+      sortColumn: { path: "title", order: "asc" }
     };
+
     componentDidMount() {
-        this.setState({_id: "" , name:"all Categories"}, {plants: getPlants(),categories: getCategories()});
-    }
-    handleDelete = plant => {
+        const categories = [{ _id: "", name: "All Genres" }, ...getCategories()];
+    
+        this.setState({ movies: getPlants(), categories });
+      }
+    
+      handleDelete = plant => {
         const plants = this.state.plants.filter(m => m._id !== plant._id);
-        this.setState({plants});
+        this.setState({ plants });
+      };
+
+    
+    handleLike = movie => {
+        const movies = [...this.state.movies];
+        const index = movies.indexOf(movie);
+        movies[index] = { ...movies[index] };
+        movies[index].liked = !movies[index].liked;
+        this.setState({ movies });
     };
-    handleLike = plant=>{
-        const plants = [...this.state.plants];
-        const index = plants.indexOf(plant);
-        plants[index]= {...plants[index]};
-        plants[index].liked = !plants[index].liked;
-        this.setState({plants});
+
+    handlePageChange = page => {
+        this.setState({ currentPage: page });
+    };
+
+
+
 
     };
     handlePageChange= page => {
