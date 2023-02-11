@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
   const category = await Category.findById(req.body.categoryId);
   if (!category) return res.status(400).send('Invalid category.');
 
-  let plant = new Plant({ 
+  const plant = new Plant({ 
     title: req.body.title,
     category: {
       _id: category._id,
@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 
 
   });
-  plant = await plant.save();
+  await plant.save();
   
   res.send(plant);
 });

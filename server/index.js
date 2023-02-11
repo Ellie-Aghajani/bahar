@@ -1,3 +1,5 @@
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const mongoose = require('mongoose');
 require('dotenv').config()
 const mongoPassword = process.env.MONGO_PASSWORD;

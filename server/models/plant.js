@@ -32,7 +32,7 @@ const Plant = mongoose.model('Plants', new mongoose.Schema({
 function validatePlant(plant) {
   const schema = {
     title: Joi.string().min(5).max(50).required(),
-    categoryId: Joi.string().required(),
+    categoryId: Joi.objectId().required(),
     numberInStock: Joi.number().min(0).required(),
     price: Joi.number().min(0).required()
 
