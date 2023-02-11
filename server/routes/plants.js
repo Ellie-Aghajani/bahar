@@ -22,7 +22,9 @@ router.post('/', async (req, res) => {
       _id: category._id,
       name: category.name
     },
-    numberInStock: req.body.numberInStock
+    numberInStock: req.body.numberInStock,
+    price: req.body.price
+
 
   });
   plant = await plant.save();
@@ -44,7 +46,9 @@ router.put('/:id', async (req, res) => {
         _id: category._id,
         name: category.name
       },
-      numberInStock: req.body.numberInStock
+      numberInStock: req.body.numberInStock,
+      price: req.body.price
+
     }, { new: true });
 
   if (!category) return res.status(404).send('The plant with the given ID was not found.');
