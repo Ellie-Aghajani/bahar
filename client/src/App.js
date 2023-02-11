@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import Plants from "./components/plants";
-import Form from "./components/form";
+import PlantForm from "./components/form";
 import Customers from "./components/customer";
 import Purchase from "./components/purchase";
 import NotFound from "./components/notFound";
@@ -18,8 +18,8 @@ class App extends Component {
         <main className="container">
           <Switch>
            <Route path="/register" component={RegisterForm} />
-            <Route path="/form" component={Form} />
-            <Route path="/loginForm" component={LoginForm} />
+            <Route path="/plants/:id"  component={PlantForm} />
+            <Route path="/login" component={LoginForm} />
             <Route path="/plants" component={Plants} />
             <Route path="/customer" component={Customers} />
             <Route path="/purchase" component={Purchase} />
