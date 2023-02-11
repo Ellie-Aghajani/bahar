@@ -55,39 +55,8 @@ class Plants extends Component {
                 <div className="col">
                     
                  <p>Showing {filtered} plants in the database </p>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th>Plant</th>
-                        <th>Category</th>
-                        <th>Stock</th>
-                        <th>Rate</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.plants.map(plant =>(
-                        <tr key={plant._id}>
-                            <td>{plant.title}</td>
-                            <td>{plant.category.name}</td>
-                            <td>{plant.numberInStock}</td>
-                            <td>{plant.dailySalesRate}</td>
-                            <td>
-                                <Like liked={plant.liked} onClick={() => this.handleLike(plant) }/>
-                            </td>
-                            <td>
-                                <button 
-                                onClick={()=> this.handleDelete(plant)} 
-                                className= "btn btn-danger btn-sm">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                
-                </tbody>
-                
-            </table>
+                 <PlantsTable plants = {plants} onLike={this,handleLike} onDelete={this.handleDelete}/>
+
             <Pagination 
                 itemsCount= {filtered.length} 
                 pageSize={pageSize} 
