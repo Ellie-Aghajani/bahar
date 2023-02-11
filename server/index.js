@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const express = require('express');
 const categories = require('./routes/categories')
 const customers = require('./routes/customers')
+const plants = require('./routes/plants')
+
 const app = express();
 const port = process.env.PORT|| 2017;
 
@@ -13,6 +15,8 @@ mongoose.connect('mongodb://localhost/bahar')
 app.use(express.json());
 app.use('/api/categories', categories);
 app.use('/api/customers', customers);
+app.use('/api/plantss', plants);
+
 
 
 
