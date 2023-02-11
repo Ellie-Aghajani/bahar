@@ -2,8 +2,12 @@ const {Purchase, validate} = require('../models/purchase');
 const {Plant} = require('../models/plant'); 
 const {Customer} = require('../models/customer'); 
 const mongoose = require('mongoose');
+const Fawn = require('fawn');
 const express = require('express');
 const router = express.Router();
+
+
+Fawn.init(mongoose);
 
 router.get('/', async (req, res) => {
   const purchases = await Purchase.find().sort('-dateOut');
@@ -34,12 +38,24 @@ router.post('/', async (req, res) => {
       price: plant.price
     }
   });
-  purchase = await purchase.save();
+  // purchase = await purchase.save();
 
-  plant.numberInStock--;
-  plant.save();
+  // plant.numberInStock--;
+  // plant.save();
+  try {
+    new Fawn.Task()
+      .save("purchases", purchase)
+      .update('plants', {_id: plant._id}, {
+        $inc: { numberInStock: -1 }
+      })
+      .run();
+    res.send(purchase);
+
+  }
+  catch{
+    res.status(500).send('something failed.')
+  }
   
-  res.send(purchase);
 });
 
 router.get('/:id', async (req, res) => {
