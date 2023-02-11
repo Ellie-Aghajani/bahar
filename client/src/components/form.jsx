@@ -1,6 +1,12 @@
-import React from "react";
 
-class Form extends Form {
+import React from "react";
+import Joi from "joi-browser";
+import Form from "./common/form";
+import { getPlant, savePlant } from "../services/PlantDB";
+import { getCategories } from "../services/plantCategories";
+
+
+class PlantForm extends Form {
   state = {
     data: {
       title: "",
@@ -50,7 +56,7 @@ class Form extends Form {
   }
 
   doSubmit = () => {
-    saveplant(this.state.data);
+    savePlant(this.state.data);
 
     this.props.history.push("/plants");
   };
@@ -69,4 +75,4 @@ class Form extends Form {
   }
 };
 
-export default Form;
+export default PlantForm;
