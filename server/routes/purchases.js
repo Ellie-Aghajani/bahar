@@ -66,4 +66,6 @@ router.get('/:id', async (req, res) => {
   res.send(purchase);
 });
 
+
+
 module.exports = router; 
