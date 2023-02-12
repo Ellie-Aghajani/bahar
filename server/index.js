@@ -17,8 +17,6 @@ const purchases = require('./routes/purchases');
 const app = express();
 const port = process.env.PORT|| 2017;
 
-// mongoose.connect('mongodb://localhost/bahar')
-
 
 app.use(express.json());
 app.use('/api/categories', categories);
