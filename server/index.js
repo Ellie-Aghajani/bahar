@@ -1,33 +1,18 @@
-const Joi = require('joi');
-Joi.objectId = require('joi-objectid')(Joi);
-const mongoose = require('mongoose');
-require('dotenv').config()
-
-mongoose.connect(`mongodb://localhost:27017/baharfinal`)
-  .then(() => console.log('Connected to MongoDB...'))
-  .catch(err => console.error('Could not connect to MongoDB...'));
-
-const express = require('express');
-const categories = require('./routes/categories');
-const customers = require('./routes/customers');
-const plants = require('./routes/plants');
-const purchases = require('./routes/purchases');
-
-
+const winston = require("winston");
+const express = require("express");
+const config = require("config");
 const app = express();
-const port = process.env.PORT|| 2017;
 
+require("./startup/logging")();
+require("./startup/cors")(app);
+require("./startup/routes")(app);
+require("./startup/db")();
+require("./startup/config")();
+require("./startup/validation")();
 
-app.use(express.json());
-app.use('/api/categories', categories);
-app.use('/api/customers', customers);
-app.use('/api/plants', plants);
-app.use('/api/purchases', purchases);
+const port = process.env.PORT || config.get("port");
+const server = app.listen(port, () =>
+  winston.info(`Listening on port ${port}...😎👌`)
+);
 
-
-
-
-
-app.listen(port, ()=>{
-    console.log(`App is listening on port ${port} 😎👌`);
-});
+module.exports = server;
