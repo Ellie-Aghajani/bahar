@@ -1,13 +1,18 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Table from "./common/table";
 import Like from "./common/like";
-import { Link } from "react-router-dom";
 
 class PlantsTable extends Component {
   columns = [
-    { path: "title", label: "Plant Name" },
+    {
+      path: "title",
+      label: "Title",
+      content: plant => <Link to={`/plants/${plant._id}`}>{plant.title}</Link>
+    },
     { path: "category.name", label: "Category" },
     { path: "numberInStock", label: "Stock" },
+
     {
       key: "like",
       content: plant => (
