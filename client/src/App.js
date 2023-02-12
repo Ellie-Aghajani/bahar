@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import Plants from "./components/plants";
-import PlantForm from "./components/form";
+import PlantForm from "./components/plantForm";
 import Customers from "./components/customer";
 import Purchase from "./components/purchase";
 import NotFound from "./components/notFound";
@@ -17,7 +17,7 @@ class App extends Component {
         <Navbar />
         <main className="container">
           <Switch>
-           <Route path="/register" component={RegisterForm} />
+            <Route path="/register" component={RegisterForm} />
             <Route path="/plants/:id"  component={PlantForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/plants" component={Plants} />
