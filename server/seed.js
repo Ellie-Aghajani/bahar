@@ -7,25 +7,25 @@ const data = [
   {
     name: "Low Light Tolerant",
     plants: [
-      { title: "Begonia ", numberInStock: 5, price: 54 },
-      { title: "Velvet Elvis", numberInStock: 10, price: 23 },
-      { title: "Sweet Alyssum", numberInStock: 15, price: 65 }
+      { title: "Sanseviera ", numberInStock: 10, price: 54 },
+      { title: "Zz-plant", numberInStock: 12, price: 70 },
+      { title: "Philodendron", numberInStock: 15, price: 65 }
     ]
   },
   {
     name: "Hard to Kill",
     plants: [
-      { title: "Catmint", numberInStock: 5, price: 65 },
-      { title: "Zinnia", numberInStock: 10, price: 46 },
-      { title: "Pansies", numberInStock: 15, price: 56 }
+      { title: "Money tree", numberInStock: 20, price: 68 },
+      { title: "Weeping fig", numberInStock: 10, price: 56 },
+      { title: "Reed palm", numberInStock: 15, price: 63 }
     ]
   },
   {
     name: "Pet Friendly",
     plants: [
-      { title: "Common Snapdragon", numberInStock: 5, price: 76 },
-      { title: "African Violets", numberInStock: 10, price: 86 },
-      { title: "Celosia", numberInStock: 15, price: 65 }
+      { title: "Peacock plant", numberInStock: 13, price: 62 },
+      { title: "Green prayer", numberInStock: 10, price: 86 },
+      { title: "Calathea orbifolia", numberInStock: 15, price: 64 }
     ]
   }
 ];
