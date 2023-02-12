@@ -1,6 +1,6 @@
 {
     "jwtPrivateKey": "unsecureKey",
-    "db": "mongodb://localhost:27017/baharfinal",
+    "db": "mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority",
     "port": "2017",
     "requiresAuth": false
   }
