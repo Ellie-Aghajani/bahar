@@ -1,6 +1,6 @@
 {
     "jwtPrivateKey": "unsecureKey",
-    "db": "mongodb://localhost/bahar",
+    "db": "mongodb://localhost:27017/baharfinal",
     "port": "2017",
     "requiresAuth": false
   }

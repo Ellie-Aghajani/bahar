@@ -32,11 +32,10 @@ const data = [
 
 async function seed() {
 
-  await mongoose.connect(`mongodb://localhost:27017/baharfinal`)
-    .then(() => console.log('Connected to MongoDB...'))
-    .catch(err => console.error('Could not connect to MongoDB...', `mongodb+srv://admin:6263@bahar.wzugx7i.mongodb.net/?retryWrites=true&w=majority`));
+  await mongoose.connect(config.get("db"));
+  await Plant.deleteMany({});
+  await Category.deleteMany({});
 
- 
   for (let category of data) {
     const { _id: categoryId } = await new Category({ name: category.name }).save();
     const plants = category.plants.map(plant => ({
@@ -52,3 +51,4 @@ async function seed() {
 }
 
 seed();
+
