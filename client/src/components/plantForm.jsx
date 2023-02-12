@@ -14,7 +14,7 @@ class PlantForm extends Form {
       numberInStock: "",
      
     },
-    category: [],
+    categories: [],
     errors: {}
   };
   schema = {
@@ -66,7 +66,7 @@ class PlantForm extends Form {
         <h1> Form</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("title", "Title")}
-          {this.renderSelect("categoryId", "Category", this.state.categorys)}
+          {this.renderSelect("categoryId", "Category", this.state.categories)}
           {this.renderInput("numberInStock", "Number in Stock", "number")}
           {this.renderButton("Save")}
         </form>

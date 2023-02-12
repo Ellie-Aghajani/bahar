@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import PlantsTable from "./plantTable";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
-import { getPlants } from "../services/PlantDB";
+import { getPlants, deletePlant } from "../services/PlantDB";
 import { getCategories } from "../services/plantCategories";
 import { paginate } from "../utils/paginate";
 import _ from "lodash";
+import SearchBox from "./searchBox";
 
 
 
@@ -15,6 +17,8 @@ class Plants extends Component {
       categories: [],
       currentPage: 1,
       pageSize: 4,
+      searchQuery: "",
+      selectedCategory: null,
       sortColumn: { path: "title", order: "asc" }
     };
 
@@ -27,6 +31,7 @@ class Plants extends Component {
       handleDelete = plant => {
         const plants = this.state.plants.filter(m => m._id !== plant._id);
         this.setState({ plants });
+        deletePlant(plant._id);
       };
 
     
@@ -43,7 +48,11 @@ class Plants extends Component {
     };
 
     handleCategorySelect = category => {
-        this.setState({ selectedCategory: category, currentPage: 1 });
+        this.setState({ selectedCategory: category, searchQuery: "", currentPage: 1 });
+      };
+
+      handleSearch = query => {
+        this.setState({ searchQuery: query, selectedCategory: null, currentPage: 1 });
       };
     
       handleSort = sortColumn => {
@@ -56,13 +65,17 @@ class Plants extends Component {
           currentPage,
           sortColumn,
           selectedCategory,
+          searchQuery,
           plants: allPlants
         } = this.state;
     
-        const filtered =
-          selectedCategory && selectedCategory._id
-            ? allPlants.filter(m => m.category._id === selectedCategory._id)
-            : allPlants;
+        let filtered = allPlants;
+        if (searchQuery)
+          filtered = allPlants.filter(m =>
+            m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+          );
+        else if (selectedCategory && selectedCategory._id)
+          filtered = allPlants.filter(m => m.category._id === selectedCategory._id);
     
         const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
     
@@ -75,7 +88,7 @@ class Plants extends Component {
 
       render() {
         const { length: count } = this.state.plants;
-        const { pageSize, currentPage, sortColumn } = this.state;
+        const { pageSize, currentPage, sortColumn, searchQuery } = this.state;
     
         if (count === 0) return <p>There are no plants in the database.</p>;
     
@@ -91,21 +104,26 @@ class Plants extends Component {
               />
             </div>
             <div className="col">
-              <p>Showing {totalCount} plants in our GreenHouse.</p>
+              <Link
+                to="/plants/new"
+                className="btn btn-primary"
+                style={{ marginBottom: 20 }}>
+                New Plant
+              </Link>
+              <p>Showing {totalCount} plants in the database.</p>
+              <SearchBox value={searchQuery} onChange={this.handleSearch} />
               <PlantsTable
                 plants={plants}
                 sortColumn={sortColumn}
                 onLike={this.handleLike}
                 onDelete={this.handleDelete}
-                onSort={this.handleSort}
-              />
+                onSort={this.handleSort}/>
               <Pagination
                 itemsCount={totalCount}
                 pageSize={pageSize}
                 currentPage={currentPage}
-                onPageChange={this.handlePageChange}
-              />
-            </div>
+                onPageChange={this.handlePageChange}/>
+              </div>
           </div>
         );
       }

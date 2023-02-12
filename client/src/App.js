@@ -1,23 +1,26 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
+import {ToastContainer} from 'react-toastify';
 import Plants from "./components/plants";
-import PlantForm from "./components/form";
+import PlantForm from "./components/plantForm";
 import Customers from "./components/customer";
 import Purchase from "./components/purchase";
 import NotFound from "./components/notFound";
 import Navbar from "./components/navbar";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
+import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
 
 class App extends Component {
   render() {
     return (
       <React.Fragment>
+        <ToastContainer />
         <Navbar />
         <main className="container">
           <Switch>
-           <Route path="/register" component={RegisterForm} />
+            <Route path="/register" component={RegisterForm} />
             <Route path="/plants/:id"  component={PlantForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/plants" component={Plants} />
