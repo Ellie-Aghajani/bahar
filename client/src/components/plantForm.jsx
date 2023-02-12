@@ -2,8 +2,8 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import { getPlant, savePlant } from "../services/PlantDB";
-import { getCategories } from "../services/plantCategories";
+import { getPlant, savePlant } from "../services/plantService";
+import { getCategories } from "../services/categoryService";
 
 
 class PlantForm extends Form {
@@ -12,6 +12,7 @@ class PlantForm extends Form {
       title: "",
       categoryId: "",
       numberInStock: "",
+      price:""
      
     },
     categories: [],
@@ -30,16 +31,21 @@ class PlantForm extends Form {
       .min(0)
       .max(100)
       .label("Number in Stock"),
+    price: Joi.number()
+      .required()
+      .min(0)
+      .max(100)
+      .label("Price"),
 
   };
-  componentDidMount() {
-    const categories = getCategories();
+  async componentDidMount() {
+    const {data: categories} = await getCategories();
     this.setState({ categories });
 
     const plantId = this.props.match.params.id;
     if (plantId === "new") return;
 
-    const plant = getPlant(plantId);
+    const { data: plant } = await getPlant(plantId);
     if (!plant) return this.props.history.replace("/not-found");
 
     this.setState({ data: this.mapToViewModel(plant) });
@@ -51,6 +57,7 @@ class PlantForm extends Form {
       title: plant.title,
       categoryId: plant.category._id,
       numberInStock: plant.numberInStock,
+      price: plant.price
       
     };
   }
@@ -68,6 +75,7 @@ class PlantForm extends Form {
           {this.renderInput("title", "Title")}
           {this.renderSelect("categoryId", "Category", this.state.categories)}
           {this.renderInput("numberInStock", "Number in Stock", "number")}
+          {this.renderInput("price", "Price", "number")}
           {this.renderButton("Save")}
         </form>
       </div>

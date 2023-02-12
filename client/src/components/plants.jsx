@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import {toast} from 'react-toastify';
 import PlantsTable from "./plantTable";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
-import { getPlants, deletePlant } from "../services/PlantDB";
-import { getCategories } from "../services/plantCategories";
+import { getPlants, deletePlant } from "../services/plantService";
+import { getCategories } from "../services/categoryService";
 import { paginate } from "../utils/paginate";
 import _ from "lodash";
 import SearchBox from "./searchBox";
@@ -22,17 +23,26 @@ class Plants extends Component {
       sortColumn: { path: "title", order: "asc" }
     };
 
-    componentDidMount() {
-        const categories = [{ _id: "", name: "All Categories" }, ...getCategories()];
+    async componentDidMount() {
+      const { data } = await getCategories();
+      const categories = [{ _id: "", name: "All Categories" }, ...data];
+      const{data: plants} = await getPlants();
+      this.setState({ plants, categories });
+    }
     
-        this.setState({ plants: getPlants(), categories });
+    handleDelete = async plant => {
+      const originalPlants = this.state.plants;
+      const plants= originalPlants.filter(m => m._id !== plant._id);
+      this.setState({ plants });
+      try{
+      await deletePlant(plant._id);
       }
-    
-      handleDelete = plant => {
-        const plants = this.state.plants.filter(m => m._id !== plant._id);
-        this.setState({ plants });
-        deletePlant(plant._id);
-      };
+      catch (ex) {
+        if (ex.response && ex.response.status ===404)
+        toast.error('This plant has already been deleted.');
+        this.setState({plants:originalPlants});
+      }
+    };
 
     
     handleLike = plant => {
