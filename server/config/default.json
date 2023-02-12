@@ -1,5 +1,7 @@
 {
-    "name":"Bahar",
-    "db": "mongodb://localhost/baghar",
-    "port": "2017"
-}
+    "jwtPrivateKey": "unsecureKey",
+    "db": "mongodb://localhost/bahar",
+    "port": "2017",
+    "requiresAuth": false
+  }
+  
