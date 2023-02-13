@@ -13,6 +13,7 @@ import Logout from "./components/logout";
 import ProtectedRoute from "./components/common/protectedRoute";
 import auth from "./services/authService";
 import 'react-toastify/dist/ReactToastify.css';
+import MainOne from "./components/mainOne";
 import "./App.css";
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
       <React.Fragment>
         <ToastContainer />
         <NavBar user={user} />
+        <MainOne />
         <main className="container">
           <Switch>
             <Route path="/register" component={RegisterForm} />
