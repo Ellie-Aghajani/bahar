@@ -38,17 +38,28 @@ class PlantForm extends Form {
       .label("Price"),
 
   };
-  async componentDidMount() {
-    const {data: categories} = await getCategories();
+
+  async populateCategories() {
+    const { data: categories } = await getCategories();
     this.setState({ categories });
+  }
 
-    const plantId = this.props.match.params.id;
-    if (plantId === "new") return;
+  async populatePlant() {
+    try {
+      const plantId = this.props.match.params.id;
+      if (plantId === "new") return;
 
-    const { data: plant } = await getPlant(plantId);
-    if (!plant) return this.props.history.replace("/not-found");
+      const { data: plant } = await getPlant(plantId);
+      this.setState({ data: this.mapToViewModel(plant) });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404)
+        this.props.history.replace("/not-found");
+    }
+  }
 
-    this.setState({ data: this.mapToViewModel(plant) });
+  async componentDidMount() {
+    await this.populateCategories();
+    await this.populatePlant();
   }
 
   mapToViewModel(plant) {
@@ -57,30 +68,30 @@ class PlantForm extends Form {
       title: plant.title,
       categoryId: plant.category._id,
       numberInStock: plant.numberInStock,
-      price: plant.price
-      
+      dailyRentalRate: plant.dailyRentalRate
     };
   }
 
-  doSubmit = () => {
-    savePlant(this.state.data);
+  doSubmit = async () => {
+    await savePlant(this.state.data);
 
     this.props.history.push("/plants");
   };
+
   render() {
     return (
       <div>
-        <h1> Form</h1>
+        <h1>Plant Form</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("title", "Title")}
           {this.renderSelect("categoryId", "Category", this.state.categories)}
           {this.renderInput("numberInStock", "Number in Stock", "number")}
-          {this.renderInput("price", "Price", "number")}
+          {this.renderInput("price", "Price")}
           {this.renderButton("Save")}
         </form>
       </div>
     );
   }
-};
+}
 
 export default PlantForm;

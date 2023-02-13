@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import {toast} from 'react-toastify';
-import PlantsTable from "./plantTable";
+import PlantsTable from "./plantsTable";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
 import { getPlants, deletePlant } from "../services/plantService";
@@ -9,6 +9,7 @@ import { getCategories } from "../services/categoryService";
 import { paginate } from "../utils/paginate";
 import _ from "lodash";
 import SearchBox from "./searchBox";
+
 
 
 
@@ -40,7 +41,7 @@ class Plants extends Component {
       catch (ex) {
         if (ex.response && ex.response.status ===404)
         toast.error('This plant has already been deleted.');
-        this.setState({plants:originalPlants});
+        this.setState({ plants: originalPlants });
       }
     };
 
@@ -99,7 +100,8 @@ class Plants extends Component {
       render() {
         const { length: count } = this.state.plants;
         const { pageSize, currentPage, sortColumn, searchQuery } = this.state;
-    
+        const { user } = this.props;
+
         if (count === 0) return <p>There are no plants in the database.</p>;
     
         const { totalCount, data: plants } = this.getPagedData();
@@ -114,13 +116,17 @@ class Plants extends Component {
               />
             </div>
             <div className="col">
+            {user && (
               <Link
-                to="/plants/new"
-                className="btn btn-primary"
-                style={{ marginBottom: 20 }}>
-                New Plant
+                  to="/plants/new"
+                  className="btn btn-primary"
+                  style={{ marginBottom: 20 }}>
+                  New Plant
               </Link>
-              <p>Showing {totalCount} plants in the database.</p>
+            )}
+              
+
+              <p>Showing {totalCount} plants in the greenhouse.</p>
               <SearchBox value={searchQuery} onChange={this.handleSearch} />
               <PlantsTable
                 plants={plants}
