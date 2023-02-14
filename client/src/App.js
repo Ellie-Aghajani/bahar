@@ -22,6 +22,7 @@ class App extends Component {
 
   componentDidMount() {
     const user = auth.getCurrentUser();
+    console.log("user+++++",user);
     this.setState({ user });
   }
   
@@ -43,6 +44,7 @@ class App extends Component {
               path="/plants"
               render={props => <Plants {...props} user={this.state.user} />}
             />
+          
             <Route path="/customers" component={Customers} />
             <Route path="/admin/plants" component={AdminPlants} />
 

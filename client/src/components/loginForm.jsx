@@ -25,14 +25,17 @@ class LoginForm extends Form {
       const { data } = this.state;
       const result = await auth.login(data.username, data.password);
       console.log("////+++++", result);
-      if (result.isAdmin){
-        //navigate to admin page
-      } else{
-        //navigate to user page
-      }
+      // return <Redirect to="/plants" />;
+      // if (result.isAdmin){
+      //   //navigate to admin page   /admin/plants
+      // } else{
+      //   <Redirect to="/customers" />;
+      //   //navigate to user page   /customers
+      // }
 
       const { state } = this.props.location;
-      // window.location = state ? state.from.pathname : "/";
+      console.log('state++++', state);
+      window.location = state ? state.from.pathname : "/admin/plants";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
