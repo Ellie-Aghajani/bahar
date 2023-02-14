@@ -9,6 +9,7 @@ import { getCategories } from "../services/categoryService";
 import { paginate } from "../utils/paginate";
 import _ from "lodash";
 import SearchBox from "./searchBox";
+import Plantcard from "./plantcard";
 
 
 
@@ -108,7 +109,12 @@ class Plants extends Component {
     
         return (
           <div className="row">
-            <div className="col-3">
+            { this.state.plants.map((plant, index) =>(
+              <Plantcard key={index} plant={plant} />
+
+            )) }
+
+            {/* <div className="col-3">
               <ListGroup
                 items={this.state.categories}
                 selectedItem={this.state.selectedCategory}
@@ -139,7 +145,7 @@ class Plants extends Component {
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageChange={this.handlePageChange}/>
-              </div>
+              </div> */}
           </div>
         );
       }

@@ -23,10 +23,16 @@ class LoginForm extends Form {
   
     try {
       const { data } = this.state;
-      await auth.login(data.username, data.password);
+      const result = await auth.login(data.username, data.password);
+      console.log("////+++++", result);
+      if (result.isAdmin){
+        //navigate to admin page
+      } else{
+        //navigate to user page
+      }
 
       const { state } = this.props.location;
-      window.location = state ? state.from.pathname : "/";
+      // window.location = state ? state.from.pathname : "/";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };

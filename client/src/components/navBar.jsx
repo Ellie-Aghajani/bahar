@@ -1,10 +1,12 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import logo from '../images/logo.jpeg'
 
 const NavBar = ({ user }) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link className="navbar-brand" to="/">
+    <nav className="nav-scss navbar navbar-expand-lg navbar-light bg-light">
+      <img className="logo" src={logo} alt="logo"/> 
+      <Link className="navbar-brand" id="navbrand" to="/">
         Bahar
       </Link>
       <button

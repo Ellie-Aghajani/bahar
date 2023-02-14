@@ -8,8 +8,11 @@ const tokenKey = "token";
 http.setJwt(getJwt());
 
 export async function login(email, password) {
-  const { data: jwt } = await http.post(apiEndpoint, { email, password });
-  localStorage.setItem(tokenKey, jwt);
+  const { data } = await http.post("/auth/login", { email, password });
+  console.log("_______::::", email, password, data);
+  delete data.password;
+  localStorage.setItem(tokenKey, JSON.stringify(data));
+  return data;
 }
 
 export function loginWithJwt(jwt) {
