@@ -27,3 +27,28 @@
 {"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-13T21:23:45.574Z"}
 {"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-13T21:33:48.792Z"}
 {"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-13T21:33:49.519Z"}
+{"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-13T23:14:21.249Z"}
+{"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-13T23:14:22.056Z"}
+{"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-13T23:51:46.057Z"}
+{"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-13T23:51:46.849Z"}
+{"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-14T00:23:39.738Z"}
+{"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-14T00:23:40.385Z"}
+{"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-14T00:25:51.971Z"}
+{"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-14T00:25:52.495Z"}
+{"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-14T00:30:59.107Z"}
+{"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-14T00:30:59.711Z"}
+{"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-14T00:38:26.462Z"}
+{"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-14T00:38:27.131Z"}
+{"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-14T00:42:58.051Z"}
+{"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-14T00:42:58.643Z"}
+{"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-14T00:45:52.178Z"}
+{"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-14T00:45:52.777Z"}
+{"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-14T00:47:59.120Z"}
+{"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-14T00:47:59.706Z"}
+{"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-14T00:49:52.488Z"}
+{"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-14T00:49:53.062Z"}
+{"message":"result.generateAuthToken is not a function","stack":"TypeError: result.generateAuthToken is not a function\n    at /Users/elimo/lighthouse/bahar/server/routes/auth.js:24:24","level":"error","timestamp":"2023-02-14T00:49:57.245Z"}
+{"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-14T00:50:52.108Z"}
+{"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-14T00:50:52.663Z"}
+{"level":"info","message":"Listening on port 2017...😎👌","timestamp":"2023-02-14T00:51:35.965Z"}
+{"level":"info","message":"Connected to mongodb+srv://PosiblueMaChiNaTor:4Pk6AcmtsGIRVZcU@cluster0.7hlaj.gcp.mongodb.net/test?retryWrites=true&w=majority...","timestamp":"2023-02-14T00:51:36.573Z"}
