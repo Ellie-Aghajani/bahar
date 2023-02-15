@@ -10,6 +10,8 @@ import { paginate } from "../utils/paginate";
 import _ from "lodash";
 import SearchBox from "./searchBox";
 import Plantcard from "./plantcard";
+import MainOne from "./mainOne";
+
 
 
 
@@ -108,45 +110,47 @@ class Plants extends Component {
         const { totalCount, data: plants } = this.getPagedData();
     
         return (
-          <div className="row">
-            { this.state.plants.map((plant, index) =>(
-              <Plantcard key={index} plant={plant} />
+          
+            <div className="row">
+              { this.state.plants.map((plant, index) =>(
+                <Plantcard style={{margin: '50px'}} key={index} plant={plant} />
 
-            )) }
+              )) }
 
-            {/* <div className="col-3">
-              <ListGroup
-                items={this.state.categories}
-                selectedItem={this.state.selectedCategory}
-                onItemSelect={this.handleCategorySelect}
-              />
+              {/* <div className="col-3">
+                <ListGroup
+                  items={this.state.categories}
+                  selectedItem={this.state.selectedCategory}
+                  onItemSelect={this.handleCategorySelect}
+                />
+              </div>
+              <div className="col">
+              {user && (
+                <Link
+                    to="/plants/new"
+                    className="btn btn-primary"
+                    style={{ marginBottom: 20 }}>
+                    New Plant
+                </Link>
+              )}
+                
+
+                <p>Showing {totalCount} plants in the greenhouse.</p>
+                <SearchBox value={searchQuery} onChange={this.handleSearch} />
+                <PlantsTable
+                  plants={plants}
+                  sortColumn={sortColumn}
+                  onLike={this.handleLike}
+                  onDelete={this.handleDelete}
+                  onSort={this.handleSort}/>
+                <Pagination
+                  itemsCount={totalCount}
+                  pageSize={pageSize}
+                  currentPage={currentPage}
+                  onPageChange={this.handlePageChange}/>
+                </div> */}
             </div>
-            <div className="col">
-            {user && (
-              <Link
-                  to="/plants/new"
-                  className="btn btn-primary"
-                  style={{ marginBottom: 20 }}>
-                  New Plant
-              </Link>
-            )}
-              
-
-              <p>Showing {totalCount} plants in the greenhouse.</p>
-              <SearchBox value={searchQuery} onChange={this.handleSearch} />
-              <PlantsTable
-                plants={plants}
-                sortColumn={sortColumn}
-                onLike={this.handleLike}
-                onDelete={this.handleDelete}
-                onSort={this.handleSort}/>
-              <Pagination
-                itemsCount={totalCount}
-                pageSize={pageSize}
-                currentPage={currentPage}
-                onPageChange={this.handlePageChange}/>
-              </div> */}
-          </div>
+         
         );
       }
     }

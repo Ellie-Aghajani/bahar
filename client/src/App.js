@@ -15,6 +15,8 @@ import ProtectedRoute from "./components/common/protectedRoute";
 import auth from "./services/authService";
 import 'react-toastify/dist/ReactToastify.css';
 import MainOne from "./components/mainOne";
+import Footer from "./components/footer";
+import AdminPlantsNew from "./components/admin_plants_new";
 import "./App.css";
 
 class App extends Component {
@@ -40,6 +42,8 @@ class App extends Component {
             <Route path="/login" component={LoginForm} />
             <Route path="/logout" component={Logout} />
             <ProtectedRoute path="/plants/:id" component={PlantForm} />
+            <ProtectedRoute path="/admin/plants/new" component={PlantForm} />
+
             <Route
               path="/plants"
               render={props => <Plants {...props} user={this.state.user} />}
@@ -47,6 +51,8 @@ class App extends Component {
           
             <Route path="/customers" component={Customers} />
             <Route path="/admin/plants" component={AdminPlants} />
+            <Route path="/admin/plants/new" component={AdminPlantsNew} />
+
 
             <Route path="/purchases" component={Purchases} />
             <Route path="/not-found" component={NotFound} />
@@ -54,6 +60,7 @@ class App extends Component {
             <Redirect to="/not-found" />
           </Switch>
         </main>
+        <Footer />
       </React.Fragment>
     );
   }

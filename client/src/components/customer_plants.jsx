@@ -9,7 +9,7 @@ import { getCategories } from "../services/categoryService";
 import { paginate } from "../utils/paginate";
 import _ from "lodash";
 import SearchBox from "./searchBox";
-import "./admin_plants.scss";
+import Plantcard from "./plantCustomerCard";
 
 
 
@@ -108,8 +108,19 @@ class Plants extends Component {
         const { totalCount, data: plants } = this.getPagedData();
     
         return (
+          <div>
+            <div className="row">
+            { this.state.plants.map((plant, index) =>(
+              <Plantcard key={index} plant={plant} />
+
+            )) }
+          </div>
           <div className="row">
-            <div className="col-3 categories">
+
+            <div className="col-3 d-block">
+              <br />
+              <br />
+
               <ListGroup
                 items={this.state.categories}
                 selectedItem={this.state.selectedCategory}
@@ -117,11 +128,6 @@ class Plants extends Component {
               />
             </div>
             <div className="col">
-              <button className="btn btn-primary"
-                  style={{ marginBottom: 20 }}>
-                    <a href="http://localhost:3000/admin/plants/new">New Plant</a>
-                    
-              </button>
             {/* {user && (
               <Link
                   to="/plants/new"
@@ -130,6 +136,12 @@ class Plants extends Component {
                   New Plant
               </Link>
             )} */}
+              
+
+              <br />
+              <br />
+              <br />
+              <br />
               
               <p>Showing {totalCount} plants in the greenhouse.</p>
               <SearchBox value={searchQuery} onChange={this.handleSearch} />
@@ -145,6 +157,7 @@ class Plants extends Component {
                 currentPage={currentPage}
                 onPageChange={this.handlePageChange}/>
               </div>
+          </div>
           </div>
         );
       }

@@ -10,18 +10,24 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { error } = validate(req.body); 
-  if (error) return res.status(400).send(error.details[0].message);
-
+  // const { error } = validate(req.body); 
+  // if (error) return res.status(400).send(error.details[0].message);
+  console.log("req++++", req.body);
+  console.log("files++++", req.files);
+  
+  
   const category = await Category.findById(req.body.categoryId);
   if (!category) return res.status(400).send('Invalid category.');
 
   const plant = new Plant({ 
     title: req.body.title,
+    image: req.body.image,
+
     category: {
       _id: category._id,
       name: category.name
     },
+    description: req.body.description,
     numberInStock: req.body.numberInStock,
     price: req.body.price
 
@@ -42,10 +48,13 @@ router.put('/:id', async (req, res) => {
   const plant = await Plant.findByIdAndUpdate(req.params.id,
     { 
       title: req.body.title,
+      image: req.body.image,
+
       category: {
         _id: category._id,
         name: category.name
       },
+      description: req.body.description,
       numberInStock: req.body.numberInStock,
       price: req.body.price
 

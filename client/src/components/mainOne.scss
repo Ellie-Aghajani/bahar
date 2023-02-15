@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@1,500&display=swap');
 main{
 
     display: flex;
@@ -35,10 +36,22 @@ main{
     
   }
   .back-img{
-    width:100%;
+    width:80%;
     height: auto;
   }
   .logo{
     width: 7rem;
     border-radius: 50%;
+  }
+  .text-title{
+    font-size: 3rem;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: bolder;
+
+  }
+  .text-subtitle{
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 2rem;
+    font-weight: 500;
+
   }

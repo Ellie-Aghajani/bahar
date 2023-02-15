@@ -11,8 +11,10 @@ class PlantsTable extends Component {
       label: "Title",
       content: plant => <Link to={`/plants/${plant._id}`}>{plant.title}</Link>
     },
+    { path: "image.name", label: "Image" },
     { path: "category.name", label: "Category" },
     { path: "numberInStock", label: "Stock" },
+    { path: "description", label: "Description" },
     { path: "price", label: "Price" },
 
     {

@@ -6,7 +6,7 @@ const NavBar = ({ user }) => {
   
   return (
     <nav className="nav-scss navbar navbar-expand-lg navbar-light bg-light">
-      <img className="logo" src={logo} alt="logo"/> 
+      <img className="logo pr-3" src={logo} alt="logo"/> 
       <Link className="navbar-brand" id="navbrand" to="/">
         Bahar
       </Link>

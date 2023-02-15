@@ -1,11 +1,13 @@
 import React from "react";
-import Plants from "./admin_plants";
+import Plants from "./customer_plants";
 
 const Customers = () => {
   return(
     <div>
-      <h1>Customers</h1>;
+      <br />
+      <h1>My Favorite Plants</h1>
       <Plants />
+      <br />
 
     </div>
   ) 
