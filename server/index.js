@@ -48,7 +48,7 @@ app.post('/upload', async (req, res) => {
     }
 
     const plant = await Plant.findOne({_id: plantId});
-    console.log("+++plant_id+++", plantId, plant);
+    console.log("+++plant_id+, plant++", plantId, plant);
     plant.image_url = name;
     await plant.save();
 
