@@ -25,20 +25,7 @@ Tech stack: React, Node.js , Express and MongoDB
 ### ***Final Product***
 
 #### ***Desktop View***
-!["Displays featured vehicles based on likes."](https://github.com/toddteigland/Midterm/blob/master/docs/kanuck_homepage_2.png)
-!["Search for vehicles to buy!"](https://github.com/toddteigland/Midterm/blob/master/docs/kanuck_homepage_1.png)
-!["View all the vehicles you've liked!"](https://github.com/toddteigland/Midterm/blob/master/docs/kanuck_dashboardPage.png)
-
-#### ***Mobile View***
-!["View the website on any device."](https://github.com/toddteigland/Midterm/blob/master/docs/kanuck_mobileView_2.png)
-!["Scroll through listed vehicles and view them with ease."](https://github.com/toddteigland/Midterm/blob/master/docs/kanuck_mobileView_1.png)
-###  ***Dependencies*** 
-
-- Node.js
-- Express
-- MongoDB
-- cookieParser
-- sassMiddleware
+!["homepage"](https://github.com/Ellie-Aghajani/bahar/blob/master/Screenshot%202023-06-26%20at%208.15.29%20PM.png)
 
 ### ***Getting Started***
 
